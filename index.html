@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a2e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>🎨 PhotoEditor Pro</title>
+    <title>PhotoEditor Pro</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <!-- Splash Screen -->
@@ -18,19 +15,31 @@
         <p>Carregando...</p>
     </div>
 
-    <!-- Header Mobile -->
-    <header class="mobile-header">
+    <!-- Desktop Header -->
+    <header class="desktop-header" id="desktopHeader">
+        <h1>🎨 PhotoEditor Pro</h1>
+        <div class="header-actions">
+            <button class="icon-btn" id="undoBtn" title="Desfazer" disabled>↩️</button>
+            <button class="icon-btn" id="redoBtn" title="Refazer" disabled>↪️</button>
+            <button class="action-btn primary" id="uploadBtnDesktop">📁 Abrir</button>
+            <button class="action-btn success" id="downloadBtnDesktop">💾 Salvar</button>
+            <button class="action-btn warning" id="resetBtnDesktop">🔄 Reset</button>
+        </div>
+    </header>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
         <button class="menu-toggle" id="menuToggle">
             <span class="hamburger"></span>
         </button>
         <h1>🎨 PhotoEditor</h1>
         <div class="header-actions">
-            <button class="icon-btn" id="undoBtn" title="Desfazer">↩️</button>
-            <button class="icon-btn" id="redoBtn" title="Refazer">↪️</button>
+            <button class="icon-btn" id="undoBtnMobile" title="Desfazer" disabled>↩️</button>
+            <button class="icon-btn" id="redoBtnMobile" title="Refazer" disabled>↪️</button>
         </div>
     </header>
 
-    <!-- Sidebar Drawer -->
+    <!-- Sidebar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -42,52 +51,64 @@
             <!-- Zoom Panel -->
             <div class="panel">
                 <h3>🔍 Zoom</h3>
-                <div class="zoom-controls-mobile">
-                    <button class="zoom-btn-lg" id="zoomOut">➖</button>
-                    <div class="zoom-slider-container">
-                        <input type="range" id="zoomSlider" min="10" max="300" value="100">
-                        <span id="zoomValue">100%</span>
-                    </div>
-                    <button class="zoom-btn-lg" id="zoomIn">➕</button>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">➖</button>
+                    <input type="range" id="zoomSlider" min="10" max="300" value="100">
+                    <button class="zoom-btn" id="zoomIn">➕</button>
                 </div>
-                <button class="btn-full" id="zoomReset">Resetar Zoom</button>
+                <div class="zoom-display">
+                    <span id="zoomValue">100%</span>
+                    <button class="btn-small" id="zoomReset">Reset</button>
+                </div>
             </div>
 
             <!-- Tools Panel -->
             <div class="panel">
                 <h3>✏️ Ferramentas</h3>
                 <div class="tool-grid">
-                    <button class="tool-btn-lg active" data-tool="cursor">
+                    <button class="tool-btn active" data-tool="cursor">
                         <span class="tool-icon">🖱️</span>
                         <span class="tool-label">Cursor</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="brush">
+                    <button class="tool-btn" data-tool="move">
+                        <span class="tool-icon">🖐️</span>
+                        <span class="tool-label">Mover</span>
+                    </button>
+                    <button class="tool-btn" data-tool="brush">
                         <span class="tool-icon">🖌️</span>
                         <span class="tool-label">Pincel</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="eraser">
+                    <button class="tool-btn" data-tool="eraser">
                         <span class="tool-icon">🧹</span>
                         <span class="tool-label">Borracha</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="rectangle">
+                    <button class="tool-btn" data-tool="rectangle">
                         <span class="tool-icon">⬜</span>
                         <span class="tool-label">Retângulo</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="circle">
+                    <button class="tool-btn" data-tool="circle">
                         <span class="tool-icon">⭕</span>
                         <span class="tool-label">Círculo</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="line">
+                    <button class="tool-btn" data-tool="line">
                         <span class="tool-icon">📏</span>
                         <span class="tool-label">Linha</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="text">
+                    <button class="tool-btn" data-tool="text">
                         <span class="tool-icon">📝</span>
                         <span class="tool-label">Texto</span>
                     </button>
-                    <button class="tool-btn-lg" data-tool="eyedropper">
+                    <button class="tool-btn" data-tool="eyedropper">
                         <span class="tool-icon">💉</span>
                         <span class="tool-label">Conta-gotas</span>
+                    </button>
+                    <button class="tool-btn" data-tool="crop">
+                        <span class="tool-icon">✂️</span>
+                        <span class="tool-label">Cortar</span>
+                    </button>
+                    <button class="tool-btn" data-tool="neon">
+                        <span class="tool-icon">🌟</span>
+                        <span class="tool-label">Neon</span>
                     </button>
                 </div>
             </div>
@@ -109,7 +130,7 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label>Tamanho do Pincel: <span id="brushSizeValue">5px</span></label>
+                    <label>Tamanho: <span id="brushSizeValue">5px</span></label>
                     <input type="range" id="brushSize" min="1" max="100" value="5">
                 </div>
             </div>
@@ -121,6 +142,16 @@
                 <div class="control-group">
                     <label>Tamanho: <span id="fontSizeValue">24px</span></label>
                     <input type="range" id="fontSize" min="10" max="100" value="24">
+                </div>
+            </div>
+
+            <!-- Crop Options -->
+            <div class="panel" id="cropPanel" style="display:none;">
+                <h3>✂️ Cortar</h3>
+                <p class="crop-instruction">Selecione a área na imagem</p>
+                <div class="crop-actions">
+                    <button class="btn-crop" id="applyCrop">✅ Aplicar</button>
+                    <button class="btn-crop-cancel" id="cancelCrop">❌ Cancelar</button>
                 </div>
             </div>
 
@@ -155,13 +186,13 @@
             <div class="panel">
                 <h3>🎭 Filtros</h3>
                 <div class="filter-scroll">
-                    <button class="filter-btn-lg active" data-filter="none">Normal</button>
-                    <button class="filter-btn-lg" data-filter="grayscale">P&B</button>
-                    <button class="filter-btn-lg" data-filter="sepia">Sépia</button>
-                    <button class="filter-btn-lg" data-filter="invert">Inverter</button>
-                    <button class="filter-btn-lg" data-filter="vintage">Vintage</button>
-                    <button class="filter-btn-lg" data-filter="cool">Frio</button>
-                    <button class="filter-btn-lg" data-filter="warm">Quente</button>
+                    <button class="filter-btn active" data-filter="none">Normal</button>
+                    <button class="filter-btn" data-filter="grayscale">P&B</button>
+                    <button class="filter-btn" data-filter="sepia">Sépia</button>
+                    <button class="filter-btn" data-filter="invert">Inverter</button>
+                    <button class="filter-btn" data-filter="vintage">Vintage</button>
+                    <button class="filter-btn" data-filter="cool">Frio</button>
+                    <button class="filter-btn" data-filter="warm">Quente</button>
                 </div>
             </div>
 
@@ -195,8 +226,8 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Action Bar -->
-        <div class="action-bar">
+        <!-- Mobile Action Bar -->
+        <div class="action-bar mobile-only" id="mobileActionBar">
             <button class="action-btn primary" id="uploadBtn">
                 <span class="action-icon">📁</span>
                 <span class="action-text">Abrir</span>
@@ -221,6 +252,7 @@
                 <canvas id="mainCanvas"></canvas>
                 <canvas id="drawCanvas"></canvas>
                 <canvas id="tempCanvas"></canvas>
+                <canvas id="cropCanvas"></canvas>
             </div>
             <!-- Loading Indicator -->
             <div class="loading" id="loading" style="display:none;">
@@ -249,6 +281,7 @@
     <!-- Hidden File Input -->
     <input type="file" id="fileInput" accept="image/*" style="display: none;">
 
+    <!-- Script no FINAL do body para garantir DOM carregado -->
     <script src="script.js"></script>
 </body>
 </html>
