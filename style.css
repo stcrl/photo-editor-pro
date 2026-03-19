@@ -64,13 +64,17 @@ body {
 }
 
 .splash-logo {
-    font-size: 4rem;
-    animation: bounce 1s infinite;
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    box-shadow: 0 0 30px rgba(78, 205, 196, 0.4);
+    margin-bottom: 20px;
+    animation: bounce 2s infinite ease-in-out;
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
 }
 
 .splash-screen h1 {
@@ -78,6 +82,7 @@ body {
     margin-top: 20px;
     background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -103,10 +108,24 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+}
+
 .desktop-header h1 {
     font-size: 1.5rem;
     background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -184,9 +203,10 @@ body {
 }
 
 .mobile-header h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -341,6 +361,7 @@ body {
     background: var(--bg-panel-dark);
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .zoom-controls input[type="range"]::-webkit-slider-thumb {
@@ -487,6 +508,7 @@ input[type="color"] {
     background: var(--bg-panel-dark);
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .adjustment-item input[type="range"]::-webkit-slider-thumb {
@@ -882,6 +904,7 @@ input[type="color"] {
     background: var(--bg-panel-dark);
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .control-group input[type="range"]::-webkit-slider-thumb {

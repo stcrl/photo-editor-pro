@@ -6,18 +6,22 @@
     <meta name="theme-color" content="#1a1a2e">
     <title>PhotoEditor Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
     <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
-        <div class="splash-logo">🎨</div>
+        <img src="logo.png" alt="Logo" class="splash-logo">
         <h1>PhotoEditor Pro</h1>
         <p>Carregando...</p>
     </div>
 
     <!-- Desktop Header -->
     <header class="desktop-header" id="desktopHeader">
-        <h1>🎨 PhotoEditor Pro</h1>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <h1>PhotoEditor Pro</h1>
+        </div>
         <div class="header-actions">
             <button class="icon-btn" id="undoBtn" title="Desfazer" disabled>↩️</button>
             <button class="icon-btn" id="redoBtn" title="Refazer" disabled>↪️</button>
@@ -32,7 +36,10 @@
         <button class="menu-toggle" id="menuToggle">
             <span class="hamburger"></span>
         </button>
-        <h1>🎨 PhotoEditor</h1>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <h1>PhotoEditor</h1>
+        </div>
         <div class="header-actions">
             <button class="icon-btn" id="undoBtnMobile" title="Desfazer" disabled>↩️</button>
             <button class="icon-btn" id="redoBtnMobile" title="Refazer" disabled>↪️</button>

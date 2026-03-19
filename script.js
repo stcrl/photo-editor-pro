@@ -6,6 +6,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🎨 PhotoEditor Pro - Iniciando...');
     
+    // Registro do Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('🚀 Service Worker registrado!', reg))
+                .catch(err => console.warn('❌ Falha ao registrar SW', err));
+        });
+    }
+
     // Inicializa o editor
     try {
         window.editor = new PhotoEditor();
